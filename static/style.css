@@ -1,0 +1,148 @@
+/* Background styling */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+    
+    
+}
+
+/* Transparent login box */
+.login-container {
+    background: url('Screenshot (88).png') no-repeat center center; 
+    background-size:cover;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo */
+.logo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+/* Input fields */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Forgot Password */
+.forgot-password {
+    color: #ccc;
+    font-size: 14px;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Wave effect */
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    clip-path: ellipse(50% 50% at 50% 100%);
+}
+.section {
+    padding: 20px;
+}
+/* === card styling for forms/output === */
+.form-card {
+    background: #f0f2f5;
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .output-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    max-width: 480px;
+    margin: 20px auto 0;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* === form groups & controls === */
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+  }
+  .form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* === button styles === */
+  .btn {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: #2ecc71;
+    color: #fff;
+    padding: 12px 24px;
+  }
+  .btn-primary:hover {
+    background: #27ae60;
+  }
+  
+  /* === ensure section padding matches theme === */
+  #meal .card,
+  #meal-plan-output {
+    width: 100%;
+  }
+  
