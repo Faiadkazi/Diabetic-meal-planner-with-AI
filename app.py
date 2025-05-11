@@ -1,6 +1,8 @@
 import sqlite3
 from datetime import date, timedelta
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from random import shuffle
+
 
 # Create the Flask app and disable strict slashes for flexibility
 app = Flask(__name__, template_folder='templates')
@@ -101,20 +103,50 @@ def ai_meals():
     params = request.get_json() or {}
     meals_per_day       = int(params.get('mealsPerDay', 3))
     goal                = params.get('healthGoal', 'Maintenance')
-    dietary_preferences = params.get('dietaryPreferences', '')
+    prefs = params.get('dietaryPreferences', 'None').lower()
+    allergies = params.get('allergies', '')       # e.g. "Gluten, Nuts"
+    allergy_list = [a.strip().lower() for a in allergies.split(',') if a.strip()]
+
+
+    breakfast = ["Oatmeal with berries", "Greek yogurt & nuts", "Avocado toast"]
+    lunch     = ["Grilled chicken salad", "Veggie wrap", "Quinoa bowl"]
+    dinner    = ["Baked salmon & veggies", "Stir-fry tofu", "Zucchini noodles & meatballs"]
+
+    
+
+    if "vegan" in prefs:
+        lunch  = ["Vegan Buddha bowl", "Lentil soup", "Veggie wrap"]
+        dinner = ["Tofu stir-fry", "Chickpea curry", "Veggie pasta"]
+
+    def filter_out_allergens(menu):
+        filtered = [dish for dish in menu
+                    if not any(allergy in dish.lower() for allergy in allergy_list)]
+        return filtered or menu  # if everything got filtered, keep at least the original list
+
+    if allergy_list:
+        breakfast = filter_out_allergens(breakfast)
+        lunch     = filter_out_allergens(lunch)
+        dinner    = filter_out_allergens(dinner)
+
+    shuffle(breakfast)
+    shuffle(lunch)
+    shuffle(dinner)
+
+
 
     plan = []
     today = date.today()
     for i in range(7):
         day = today + timedelta(days=i)
-        meals = [
-            f"Meal {j+1}: Sample for {goal} ({dietary_preferences or 'No Prefs'})"
-            for j in range(meals_per_day)
-        ]
-        plan.append({
-            'day':   day.strftime('%A, %b %d'),
-            'meals': meals
-        })
+        meals = []
+        for m in range(meals_per_day):
+            if m == 0:
+                meals.append(breakfast[(i+0) % len(breakfast)])
+            elif m == 1:
+                meals.append(lunch[(i+1) % len(lunch)])
+            else:
+                meals.append(dinner[(i+m - 2) % len(dinner)])
+        plan.append({"day":  day.strftime('%A, %b %d'), "meals": meals})
     return jsonify(plan=plan)
 
 # --- Run the app ---
