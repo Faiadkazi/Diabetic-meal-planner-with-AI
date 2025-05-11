@@ -91,7 +91,7 @@
 <!--vitals section-->
     <div id="vitals" class="section">
       <h2>Vitals</h2>
-      <form id = "vitals form" onsubmit="updateVitals(event);">
+      <form id = "vitals-form" onsubmit="updateVitals(event);">
         <div class="metric-cards">
           <div class="card" style="background: linear-gradient(135deg, #FF6B6B, #FFD93D); color: white;"><h3>Blood Pressure</h3><input
             type="text"
@@ -163,7 +163,7 @@
     }
 
     // Initialize chart and enforce login on DOM ready
-    document.addEventListener('DOMContentLoaded', function(){
+    /**document.addEventListener('DOMContentLoaded', function(){
       const ctx = document.getElementById('weightChart').getContext('2d');
       window.weightChart = new Chart(ctx, {
         type: 'line',
@@ -184,13 +184,51 @@
           scales: { y: { beginAtZero: false } }
         }
       });
-    });
+    });*/
+    const ctx = document.getElementById('weightChart').getContext('2d');
+    window.weightChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [],              // we’ll seed these in loadVitals()
+        datasets: [
+          {
+            label: 'Body Weight (kg)',
+            data: [],
+            borderColor: '#3498db',
+            backgroundColor: 'rgba(52,152,219,0.2)',
+            fill: true,
+            tension: 0.3
+      },
+        {
+          label: 'Blood Glucose (mg/dL)',
+          data: [],
+          borderColor: '#e74c3c',
+          backgroundColor: 'rgba(231,76,60,0.2)',
+          fill: true,
+          tension: 0.3
+      },
+        {
+          label: 'Fat Percentage (%)',
+          data: [],
+          borderColor: '#f1c40f',
+          backgroundColor: 'rgba(241,196,15,0.2)',
+          fill: true,
+          tension: 0.3
+      }
+    ]
+  },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: false } }
+   }
+  });
+
   </script>
 
   <!-- External vitals update script -->
   <script src="{{ url_for('static', filename='vitals.js') }}"></script>
   <script src="{{ url_for('static', filename='meal.js') }}"></script>
-  <script src="{{ url_for('static', filename='meal.js') }}"></script>
+  
 
 </body>
 </html>
